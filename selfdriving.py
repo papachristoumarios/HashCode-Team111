@@ -49,12 +49,13 @@ for i in range(T):
 
 	# match table cars
 	while (flag2==True):
-		j=available[0]
-		minDistance=-math.inf
-		minIndex=0
+
 		if (available==[] or rides==[]):
 			flag2=False
 		else:
+			j=rides[0]
+			minDistance=-math.inf
+			minIndex=0
 			for k in available:
 				dist=abs(j[1]-k[1])+abs(j[2]-k[2])
 				if (dist<minDistance):
