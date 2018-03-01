@@ -1,9 +1,10 @@
 from operator import itemgetter
 import math
 import functools
+import numpy as np
+import sys
 
-w1 = 0.5
-
+w1 = 0.15
 
 flag=True
 rides=[]
@@ -14,7 +15,7 @@ match={}
 
 i=0
 
-with open('a.in') as fileInput:
+with open(sys.argv[1] + '.in') as fileInput:
     for line in fileInput:
     	inp=[int(x) for x in line.split(' ')]
     	if (flag==True):
@@ -29,10 +30,23 @@ with open('a.in') as fileInput:
     		rides.append([i]+inp)
     		i+=1
 
+minimum, maximum = math.inf, -math.inf
+minimumTime, maximumTime = math.inf, -math.inf
+for a in rides:
+    minimum = min(minimum, (abs(a[4] - a[2]) + abs(a[3] - a[1])) )
+    maximum = max(maximum, (abs(a[4] - a[2]) + abs(a[3] - a[1])) )
+    minimumTime = min(minimumTime, a[6])
+    maximumTime = max(maximumTime, a[6])
+
+
+
 for i in range(F):
 	available.append([i,0,0,-1])
 	match[i]=[]
-rides = sorted(rides, key= lambda a :  w1 * a[6] + (1 - w1) / (abs(a[4] - a[2]) + abs(a[3] - a[1])))
+if minimumTime == maximumTime:
+    minimumTime = 0
+
+rides = sorted(rides, key= lambda a :  w1 * ( 1 -  (abs(a[4] - a[2]) + abs(a[3] - a[1]) - minimum) / (maximum - minimum) )  + (1 - w1) *  (a[6] - minimumTime) / (maximumTime - minimumTime))
 
 for i in range(T):
 	# available cars
