@@ -11,7 +11,7 @@ match={}
 
 i=0
 
-with open('example.in') as fileInput:
+with open('b.in') as fileInput:
     for line in fileInput:
     	inp=[int(x) for x in line.split(' ')]
     	if (flag==True):
@@ -78,7 +78,7 @@ for i in range(T):
 			# pop ride
 			del(rides[0])
 for i,j in match.items():
-	print(str(i+1)+' '+' '.join([str(x) for x in j]))
+	print(str(len(j))+' '+' '.join([str(x) for x in j]))
 
 
 
