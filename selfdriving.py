@@ -39,7 +39,7 @@ for i in range(T):
 		if (busy==[]):
 			flag=False
 		else:
-			print(busy)
+			# print(busy)
 			if (busy[0][3]<=i):
 				available.append(busy[0])
 				del(busy[0])
@@ -77,7 +77,8 @@ for i in range(T):
 
 			# pop ride
 			del(rides[0])
-print(match)
+for i,j in match.items():
+	print(str(i+1)+' '+' '.join([str(x) for x in j]))
 
 
 
