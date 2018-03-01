@@ -33,44 +33,52 @@ for i in range(F):
 	i+=1
 rides = sorted(rides, key=itemgetter(6))
 for i in range(T):
-	# evaluate rides
-	
-
 	# available cars
 	flag=True
 	while(flag==True):
-		if (busy[0][3]<=i):
-			available.append(busy[0])
-			del(busy[0])
-		else:
+		if (busy==[]):
 			flag=False
+		else:
+			print(busy)
+			if (busy[0][3]<=i):
+				available.append(busy[0])
+				del(busy[0])
+			else:
+				flag=False
+	flag2=True
 
 	# match table cars
-	for j in rides:
+	while (flag2==True):
+		j=available[0]
 		minDistance=-math.inf
 		minIndex=0
-		# TODO CHECK IF EMPTY
-		for k in available:
-			dist=abs(j[1]-k[1])+abs(j[2]-k[2])
-			if (dist<minDistance):
-				minDistance=dist
-				minIndex=k[0]
-		match[minIndex].append(j[0])
-		waitTmp=j[5]-(dist+i)
-		if (waitTmp<0): waitTmp=0
-		endTime=i+dist+waitTmp+abs(j[3]-j[1])+abs(j[4]-j[2])
+		if (available==[] or rides==[]):
+			flag2=False
+		else:
+			for k in available:
+				dist=abs(j[1]-k[1])+abs(j[2]-k[2])
+				if (dist<minDistance):
+					minDistance=dist
+					minIndex=k[0]
+			match[minIndex].append(j[0])
+			waitTmp=j[5]-(dist+i)
+			if (waitTmp<0): waitTmp=0
+			endTime=i+dist+waitTmp+abs(j[3]-j[1])+abs(j[4]-j[2])
 
-		# delete from available minIndex
-		for l in available:
-			if l[0]==minIndex:
-				available.remove([minIndex,l[1],l[2],l[3]])
+			# delete from available minIndex
+			for l in available:
+				if l[0]==minIndex:
+					available.remove([minIndex,l[1],l[2],l[3]])
 
-		# add car to busy
-		busy.append([minIndex,j[3],j[4],endTime])
-		busy=sorted(busy,key=itemgetter(3))
+			# add car to busy
+			busy.append([minIndex,j[3],j[4],endTime])
+			busy=sorted(busy,key=itemgetter(3))
+
+			# pop ride
+			del(rides[0])
+print(match)
 
 
-		# pop ride
 
 
 
