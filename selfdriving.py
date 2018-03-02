@@ -4,7 +4,7 @@ import functools
 import numpy as np
 import sys
 
-w1 = 0.15
+w1 = 0.5
 
 flag=True
 rides=[]
