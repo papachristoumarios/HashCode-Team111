@@ -17,7 +17,7 @@ We followed a greedy approach on the solution.
  ```
  f(ride) = w * (ride distance) + (1 - w) / (starting time)
  ```
-with `0 <= w <= 1`
+with `0 <= w <= 1` and `ride distance` and `starting time` were min-max normalized.
 
  2. Then we sent each available (not busy) driver to which serves the nearest customer.
 
